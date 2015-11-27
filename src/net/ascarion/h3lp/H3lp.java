@@ -3,7 +3,6 @@ package net.ascarion.h3lp;
 import org.jibble.pircbot.*;
 
 import java.util.HashMap;
-import java.util.Set;
 
 
 /**
@@ -16,7 +15,7 @@ public class H3lp extends PircBot {
     public static String NAME = "H3-LP";
     private static String[] CHANNELS = {"#ascarion"};
 
-    private HashMap links;
+    private HashMap<String, String> links;
 
     /**
      *
@@ -73,12 +72,12 @@ public class H3lp extends PircBot {
 
     public void hmLink(String[] message, String channel) {
         if(message.length > 1 && this.links.get(message[1]) != null)
-            this.sendMessage(channel, (String) this.links.get(message[1]));
+            this.sendMessage(channel, this.links.get(message[1]));
     }
 
     public void hmLinks(String channel) {
         String args = "";
-        for(String c: (Set<String>) this.links.keySet()) {
+        for(String c: this.links.keySet()) {
             args += c + ", ";
         }
         this.sendMessage(channel, "The following links are available: " + args.trim());
